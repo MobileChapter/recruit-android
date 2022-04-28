@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Transactions</string>
+    <string name="label_summary">SUMMARY</string>
+    <string name="transaction_id_format">ID:%1$s</string>
+    <string name="transaction_credit_format">Credit:$%1$s</string>
+    <string name="transaction_debit_format">Debit:$%1$s</string>
+    <string name="transaction_gst_format">GST:$%1$s</string>
 </resources>

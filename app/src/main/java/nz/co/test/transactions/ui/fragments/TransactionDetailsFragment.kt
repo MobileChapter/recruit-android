@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import nz.co.test.transactions.R
 import nz.co.test.transactions.data.services.Transaction
 import nz.co.test.transactions.databinding.FragmentTransactionDetailsBinding
 import java.math.BigDecimal
@@ -28,11 +29,11 @@ class TransactionDetailsFragment : Fragment() {
     }
 
     private fun setupUI(transactionDetails: Transaction) {
-        binding.transactionId.text = "ID:"+transactionDetails.id.toString()
+        binding.transactionId.text = getString(R.string.transaction_id_format, transactionDetails.id.toString())
         binding.transactionSummaryText.text =transactionDetails.summary
-        binding.transactionCreditTxt.text = "Credit:$" + transactionDetails.credit.setScale(2).toPlainString()
-        binding.transactionDebitTxt.text = "Debit:$" + transactionDetails.debit.setScale(2).toPlainString()
-        binding.transactionGST.text = "GST:$" + calculateGST(transactionDetails)
+        binding.transactionCreditTxt.text = getString(R.string.transaction_credit_format, transactionDetails.credit.setScale(2).toPlainString())
+        binding.transactionDebitTxt.text = getString(R.string.transaction_debit_format, transactionDetails.debit.setScale(2).toPlainString())
+        binding.transactionGST.text = getString(R.string.transaction_gst_format, calculateGST(transactionDetails))
     }
 
     private fun calculateGST(transactionDetails: Transaction): String {
