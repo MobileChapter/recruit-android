@@ -8,7 +8,7 @@ class TransactionRepositoryImpl @Inject constructor(
     private val api: TransactionsService
 ) : TransactionRepository {
 
-    override suspend fun getTransactions(): Array<Transaction> {
+    override suspend fun getTransactions(): List<Transaction> {
         return api.retrieveTransactions()
     }
 }
