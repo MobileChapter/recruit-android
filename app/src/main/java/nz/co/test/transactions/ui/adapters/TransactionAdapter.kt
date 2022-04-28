@@ -24,9 +24,9 @@ class TransactionAdapter(private val openTransacDetails: (Transaction) -> Unit) 
     override fun onBindViewHolder(holder: TransactionItemViewHolder, position: Int) {
         with(holder) {
             with(transactionList[position]) {
-                binding.transactionCredit.text = "Credit:" + credit.setScale(2).toPlainString()
+                binding.transactionCredit.text = "Credit:$" + credit.setScale(2).toPlainString()
                 binding.transactionSummary.text = summary
-                binding.transactionDebit.text = "Debit:" + debit.setScale(2).toPlainString()
+                binding.transactionDebit.text = "Debit:$" + debit.setScale(2).toPlainString()
                 binding.transactionDate.text = transactionDate
                 binding.transactionItemContainer.setOnClickListener {
                     openTransacDetails(this)

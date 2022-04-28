@@ -12,6 +12,12 @@ import javax.inject.Inject
 class GettingTransactionsListUseCase @Inject constructor(
     private val repository: TransactionRepository
 ) {
+
+    companion object {
+        const val DEFAULT_HTTPEXC_MSG = "An unexpected error occured"
+        const val DEFAULT_IOEXC_MSG = "Couldn't reach server"
+    }
+
     //To call use case as a function
     operator fun invoke () : Flow<Resource<List<Transaction>>> = flow {
         try {
@@ -19,9 +25,9 @@ class GettingTransactionsListUseCase @Inject constructor(
             val transactions = repository.getTransactions()
             emit(Resource.Success(transactions))
         } catch (e:HttpException) {
-            emit(Resource.Error(e.localizedMessage ?: "An unexpected error occured"))
+            emit(Resource.Error(e.localizedMessage ?: DEFAULT_HTTPEXC_MSG))
         } catch (e: IOException) {
-            emit(Resource.Error(e.localizedMessage ?: "Couldn't reach server"))
+            emit(Resource.Error(e.localizedMessage ?: DEFAULT_IOEXC_MSG))
         }
     }
 }

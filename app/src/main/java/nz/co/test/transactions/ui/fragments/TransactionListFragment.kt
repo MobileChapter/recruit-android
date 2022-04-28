@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import dagger.hilt.android.AndroidEntryPoint
 import nz.co.test.transactions.R
@@ -14,6 +13,7 @@ import nz.co.test.transactions.data.services.Transaction
 import nz.co.test.transactions.databinding.FragmentTransactionListBinding
 import nz.co.test.transactions.ui.adapters.TransactionAdapter
 import nz.co.test.transactions.ui.viewmodels.TransactionViewModel
+
 
 @AndroidEntryPoint
 class TransactionListFragment : Fragment() {
@@ -35,30 +35,37 @@ class TransactionListFragment : Fragment() {
     }
 
     private fun setupUI() {
+        //Labmda for clicking on transaction item
         val openTransactionDetails = { transaction: Transaction ->
-            Navigation.findNavController(binding.root).navigate(R.id.actionShowTransactionDetails)
+            val navController = Navigation.findNavController(binding.root)
+            val bundle = Bundle()
+            bundle.putParcelable("transactionDetails", transaction)
+            navController.navigate(R.id.actionShowTransactionDetails, bundle)
         }
+
+        //Setting up a list
         val adapter = TransactionAdapter(openTransactionDetails)
         binding.transactionList.adapter = adapter
-        viewModel.transactionStateLiveData.observe(viewLifecycleOwner, Observer { state ->
-            if(state.isLoading) {
+
+        //Processing states
+        viewModel.transactionStateLiveData.observe(viewLifecycleOwner) { state ->
+            if (state.isLoading) {
                 binding.loading.visibility = View.VISIBLE
             }
-            if(state.error.isNotBlank()) {
+            if (state.error.isNotBlank()) {
                 binding.textError.text = state.error
                 binding.loading.visibility = View.GONE
                 binding.textError.visibility = View.VISIBLE
             }
-            if(state.transactions.isNotEmpty()) {
+            if (state.transactions.isNotEmpty()) {
                 adapter.setItems(state.transactions)
                 binding.loading.visibility = View.GONE
             }
-        })
+        }
 
     }
 
     companion object {
-        @JvmStatic
-        fun newInstance() = TransactionListFragment()
+        @JvmStatic fun newInstance() = TransactionListFragment()
     }
 }
