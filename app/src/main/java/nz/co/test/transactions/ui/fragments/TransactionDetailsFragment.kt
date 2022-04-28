@@ -1,13 +1,11 @@
-package nz.co.test.transactions.fragments
+package nz.co.test.transactions.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import nz.co.test.transactions.R
 import nz.co.test.transactions.databinding.FragmentTransactionDetailsBinding
-import nz.co.test.transactions.databinding.FragmentTransactionListBinding
 
 class TransactionDetailsFragment : Fragment() {
 
@@ -17,8 +15,14 @@ class TransactionDetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentTransactionDetailsBinding.inflate(inflater, container, false);
+        binding = FragmentTransactionDetailsBinding.inflate(inflater, container, false)
+        setupUI()
         return binding.root
+    }
+
+    private fun setupUI() {
+        //retrieve transaction details
+        //parse to UI
     }
 
     companion object {

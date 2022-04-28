@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/transactionListFragment"
-        android:name="nz.co.test.transactions.fragments.TransactionListFragment"
+        android:name="nz.co.test.transactions.ui.fragments.TransactionListFragment"
         android:label="fragment_transaction_list"
         tools:layout="@layout/fragment_transaction_list" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/transactionDetailsFragment"
-        android:name="nz.co.test.transactions.fragments.TransactionDetailsFragment"
+        android:name="nz.co.test.transactions.ui.fragments.TransactionDetailsFragment"
         android:label="fragment_transaction_details"
         tools:layout="@layout/fragment_transaction_details" >
         <action

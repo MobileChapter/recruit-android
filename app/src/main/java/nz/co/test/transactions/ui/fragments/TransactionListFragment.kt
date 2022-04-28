@@ -1,4 +1,4 @@
-package nz.co.test.transactions.fragments
+package nz.co.test.transactions.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -17,11 +17,18 @@ class TransactionListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentTransactionListBinding.inflate(inflater, container, false);
+        binding = FragmentTransactionListBinding.inflate(inflater, container, false)
+        setupUI()
+        return binding.root
+    }
+
+    private fun setupUI() {
         binding.buttonTest.setOnClickListener {
             Navigation.findNavController(binding.root).navigate(R.id.actionShowTransactionDetails)
         }
-        return binding.root
+
+        //init recyclerview
+        //observe viewmodel livedata
     }
 
     companion object {

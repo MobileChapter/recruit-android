@@ -1,4 +1,4 @@
-package nz.co.test.transactions.services
+package nz.co.test.transactions.data.services
 
 import retrofit2.http.GET
 
