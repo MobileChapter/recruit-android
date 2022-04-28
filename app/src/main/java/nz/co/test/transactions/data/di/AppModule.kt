@@ -1,6 +1,7 @@
 package nz.co.test.transactions.data.di
 
 
+import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -8,6 +9,7 @@ import dagger.hilt.components.SingletonComponent
 import nz.co.test.transactions.data.repos.TransactionRepository
 import nz.co.test.transactions.data.repos.TransactionRepositoryImpl
 import nz.co.test.transactions.data.services.TransactionsService
+import nz.co.test.transactions.util.BigDecimalAdapter
 import nz.co.test.transactions.util.Constants
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -22,7 +24,13 @@ object AppModule {
     fun providesTransactionService(): TransactionsService {
         return Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(
+                MoshiConverterFactory.create(
+                    Moshi.Builder()
+                        .add(BigDecimalAdapter)
+                        .build()
+                )
+            )
             .build()
             .create(TransactionsService::class.java)
     }
