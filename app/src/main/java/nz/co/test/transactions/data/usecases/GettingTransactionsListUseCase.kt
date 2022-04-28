@@ -13,7 +13,7 @@ class GettingTransactionsListUseCase @Inject constructor(
     private val repository: TransactionRepository
 ) {
     //To call use case as a function
-    operator fun invoke () : Flow<Resource<Array<Transaction>>> = flow {
+    operator fun invoke () : Flow<Resource<List<Transaction>>> = flow {
         try {
             emit(Resource.Loading())
             val transactions = repository.getTransactions()
