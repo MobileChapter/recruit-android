@@ -42,13 +42,16 @@ class TransactionListFragment : Fragment() {
         binding.transactionList.adapter = adapter
         viewModel.transactionStateLiveData.observe(viewLifecycleOwner, Observer { state ->
             if(state.isLoading) {
-
+                binding.loading.visibility = View.VISIBLE
             }
             if(state.error.isNotBlank()) {
-
+                binding.textError.text = state.error
+                binding.loading.visibility = View.GONE
+                binding.textError.visibility = View.VISIBLE
             }
             if(state.transactions.isNotEmpty()) {
                 adapter.setItems(state.transactions)
+                binding.loading.visibility = View.GONE
             }
         })
 
